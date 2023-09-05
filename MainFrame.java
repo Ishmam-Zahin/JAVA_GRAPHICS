@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
     private final Integer FRAME_HEIGHT = 400;
@@ -11,8 +12,10 @@ public class MainFrame extends JFrame {
     }
 
     public void drawComponent(){
-        MyRectangle myRectangle = new MyRectangle(10, 20);
-        add(myRectangle);
-        setVisible(true);
+        MyComponents myComponents = new MyComponents();
+        add(myComponents);
+        ActionListener listener = new MyEventListener(myComponents);
+        Timer t = new Timer(1000, listener);
+        t.start();
     }
 }
