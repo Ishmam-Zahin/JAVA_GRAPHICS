@@ -12,18 +12,36 @@ public class MainFrame extends JFrame {
     }
 
     public void drawComponent(){
-        MyRectangle rectangle1 = new MyRectangle(10, 20);
-        add(rectangle1);
+        MyStraightLine line1 = new MyStraightLine(150, 200, 200, 200, 0);
+        add(line1);
         setVisible(true);
-        MyEventListener listener = new MyEventListener(rectangle1);
-        Timer t = new Timer(1000, listener);
-        t.start();
-
-        MyRectangle rectangle2 = new MyRectangle(10, 80);
-        add(rectangle2);
-        setVisible(true);
-        MyEventListener listener1 = new MyEventListener(rectangle2);
-        Timer t1 = new Timer(100, listener1);
+        MyEventListener listener1 = new MyEventListener(line1);
+        Timer t1 = new Timer(10, listener1);
         t1.start();
+
+        MyStraightLine line2 = new MyStraightLine(150, 200, 150, 250, 90);
+        add(line2);
+        setVisible(true);
+        MyEventListener listener2 = new MyEventListener(line2);
+        Timer t2 = new Timer(10, listener2);
+        t2.start();
+
+        MyStraightLine line3 = new MyStraightLine(150, 200, 100, 200, 180);
+        add(line3);
+        setVisible(true);
+        MyEventListener listener3 = new MyEventListener(line3);
+        Timer t3 = new Timer(10, listener3);
+        t3.start();
+
+        MyStraightLine line4 = new MyStraightLine(150, 200, 150, 150, 270);
+        add(line4);
+        setVisible(true);
+        MyEventListener listener4 = new MyEventListener(line4);
+        Timer t4 = new Timer(10, listener4);
+        t4.start();
+
+        MyEllipse ellipse1 = new MyEllipse(100, 150);
+        add(ellipse1);
+        setVisible(true);
     }
 }

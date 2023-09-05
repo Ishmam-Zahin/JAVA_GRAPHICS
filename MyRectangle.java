@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MyRectangle extends JComponent {
+public class MyRectangle extends JComponent implements MovingComponents {
     private int origin_X;
     private int origin_Y;
     Rectangle rectangle;

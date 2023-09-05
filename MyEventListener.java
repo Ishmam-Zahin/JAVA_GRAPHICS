@@ -3,12 +3,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 public class MyEventListener implements ActionListener {
-    MyRectangle rectangle;
+    MovingComponents movingComponents;
 
-    public MyEventListener(MyRectangle obj){
-        rectangle = obj;
+    public MyEventListener(MovingComponents obj){
+        movingComponents = obj;
     }
     public void actionPerformed(ActionEvent event){
-        rectangle.move();
+        movingComponents.move();
     }
 }
