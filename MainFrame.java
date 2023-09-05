@@ -7,6 +7,12 @@ public class MainFrame extends JFrame {
     public MainFrame(){
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //drawComponent();
+    }
+
+    public void drawComponent(){
+        MyRectangle myRectangle = new MyRectangle(10, 20);
+        add(myRectangle);
         setVisible(true);
     }
 }
