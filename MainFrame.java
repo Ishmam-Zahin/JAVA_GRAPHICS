@@ -12,10 +12,18 @@ public class MainFrame extends JFrame {
     }
 
     public void drawComponent(){
-        MyComponents myComponents = new MyComponents();
-        add(myComponents);
-        ActionListener listener = new MyEventListener(myComponents);
+        MyRectangle rectangle1 = new MyRectangle(10, 20);
+        add(rectangle1);
+        setVisible(true);
+        MyEventListener listener = new MyEventListener(rectangle1);
         Timer t = new Timer(1000, listener);
         t.start();
+
+        MyRectangle rectangle2 = new MyRectangle(10, 80);
+        add(rectangle2);
+        setVisible(true);
+        MyEventListener listener1 = new MyEventListener(rectangle2);
+        Timer t1 = new Timer(100, listener1);
+        t1.start();
     }
 }

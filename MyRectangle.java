@@ -9,15 +9,16 @@ public class MyRectangle extends JComponent {
     public MyRectangle(int x, int y){
         origin_X = x;
         origin_Y = y;
-        rectangle = new Rectangle(origin_X, origin_Y, 100, 200);
+        rectangle = new Rectangle(origin_X, origin_Y, 100, 50);
     }
 
-    public void drawRectangle(Graphics2D g){
-        g.draw(rectangle);
+    public void paintComponent(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.draw(rectangle);
     }
 
-    public void moveRectangle(){
-        rectangle.translate(1, 1);
-        System.out.println("x");
+    public void move(){
+        rectangle.translate(1, 0);
+        repaint();
     }
 }
