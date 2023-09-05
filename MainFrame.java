@@ -7,7 +7,7 @@ public class MainFrame extends JFrame {
     public MainFrame(){
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //drawComponent();
+        drawComponent();
     }
 
     public void drawComponent(){
