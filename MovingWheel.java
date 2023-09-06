@@ -36,8 +36,13 @@ public class MovingWheel extends JComponent implements MovingComponents {
         g2.draw(line3);
     }
 
+    public void setBounds(double x, double y){
+        origin_x = x;
+        origin_y = y;
+        move();
+    }
+
     public void move(){
-        origin_x++;
         wheel.setFrame(origin_x, origin_y, radious*2, radious*2);
         x1 = origin_x+radious;
         y1 = origin_y+radious;
