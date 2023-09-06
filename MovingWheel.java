@@ -51,11 +51,11 @@ public class MovingWheel extends JComponent implements MovingComponents {
     }
 
     public void rotateLines(){
-        angle1 = (angle1+10)%360;
+        angle1 = (angle1+5)%360;
         line1.setLine(x1, y1, (x1+radious*Math.cos((PI*angle1)/180)), (y1+radious*Math.sin((PI*angle1)/180)));
-        angle2 = (angle2+10)%360;
+        angle2 = (angle2+5)%360;
         line2.setLine(x1, y1, (x1+radious*Math.cos((PI*angle2)/180)), (y1+radious*Math.sin((PI*angle2)/180)));
-        angle3 = (angle3+10)%360;
+        angle3 = (angle3+5)%360;
         line3.setLine(x1, y1, (x1+radious*Math.cos((PI*angle3)/180)), (y1+radious*Math.sin((PI*angle3)/180)));
     }
 }
