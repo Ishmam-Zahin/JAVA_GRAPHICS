@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MovingCar extends JComponent implements MovingComponents{
+public class MovingCar extends JComponent{
     private int origin_x;
     private int origin_y;
     private int u_body_width, u_body_height, l_body_width, l_body_height;

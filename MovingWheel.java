@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 
-public class MovingWheel extends JComponent implements MovingComponents {
+public class MovingWheel extends JComponent {
     private double origin_x;
     private double origin_y;
     private double radious;
