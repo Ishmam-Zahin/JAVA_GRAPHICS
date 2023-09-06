@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
     private final Integer FRAME_HEIGHT = 400;
-    private final Integer FRAME_WIDTH = 1020;
+    private final Integer FRAME_WIDTH = 1920;
 
     public MainFrame(){
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -12,11 +12,18 @@ public class MainFrame extends JFrame {
     }
 
     public void drawComponent(){
-        MovingWheel wheel = new MovingWheel(20, 20, 50);
-        add(wheel);
+        MovingCar car1 = new MovingCar(20, 30);
+        add(car1);
         setVisible(true);
-        MyEventListener listener = new MyEventListener(wheel);
-        Timer t = new Timer(10, listener);
-        t.start();
+        MyEventListener listener1 = new MyEventListener(car1);
+        Timer t1 = new Timer(10, listener1);
+        t1.start();
+
+        MovingCar car2 = new MovingCar(20, 200);
+        add(car2);
+        setVisible(true);
+        MyEventListener listener2 = new MyEventListener(car2);
+        Timer t2 = new Timer(1, listener2);
+        t2.start();
     }
 }
