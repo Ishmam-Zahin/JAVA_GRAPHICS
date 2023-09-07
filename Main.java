@@ -1,14 +1,22 @@
+import javax.swing.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args){
-        MainFrame myframe = new MainFrame();
-        MyThread thread1 = new MyThread(myframe, 20, 30, 10);
-        MyThread thread2 = new MyThread(myframe, 20, 200, 9);
-        ExecutorService pool = Executors.newFixedThreadPool(2);
-        pool.execute(thread1);
-        pool.execute(thread2);
+        JFrame frame = new JFrame();
+        frame.setSize(300, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        int[] a = {4, 1, 3, 7, 2, 9, 3, 8, 4, 2};
+        SelectionSort selectionSort = new SelectionSort(a);
+
+        ThreadSorter threadSorter = new ThreadSorter(selectionSort);
+        Thread t1 = new Thread(threadSorter);
+        t1.start();
+
+        ThreadPainter threadPainter = new ThreadPainter(selectionSort, frame);
+        Thread t2 = new Thread(threadPainter);
+        t2.start();
     }
 }
