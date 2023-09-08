@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
-public class MovingSnake extends JComponent implements ActionListener {
+public class MovingSnake extends JComponent {
     private int origin_x;
     private int origin_y;
     public String direction;
@@ -51,6 +51,10 @@ public class MovingSnake extends JComponent implements ActionListener {
 
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
+        g2.drawLine(5, 5, 5, 355);
+        g2.drawLine(5, 5, 480, 5);
+        g2.drawLine(480, 5, 480, 355);
+        g2.drawLine(5, 355, 480, 355);
         for(int i=0; i<body.size(); i++){
             g2.draw(body.get(i));
         }
@@ -65,10 +69,12 @@ public class MovingSnake extends JComponent implements ActionListener {
     public void createBug(Graphics2D g){
         int x, y;
         do{
-            x = random.nextInt(95);
-            y = random.nextInt(75);
+            x = random.nextInt(90);
+            y = random.nextInt(65);
             x = x-(x%5);
             y = y-(y%5);
+            x=x+5;
+            y=y+5;
         }while (map[x][y]==1);
 
         bug.setBounds(x*5, y*5, 5, 5);
@@ -82,8 +88,7 @@ public class MovingSnake extends JComponent implements ActionListener {
         body.add(new Rectangle());
     }
 
-    public void actionPerformed(ActionEvent event){
-        //System.out.println(this.getHeight());
+    public void snakeController(){
         if(direction.equals("r")){
             moveRight();
         }
@@ -98,22 +103,20 @@ public class MovingSnake extends JComponent implements ActionListener {
             moveDown();
         }
         else{
-            System.out.println("GAME FINISHED!!!");
-            frame.stop();
+            frame.gameFinished();
         }
     }
 
     public void moveDown(){
-        try {
             int head_x = body.get(0).x;
             int head_y = body.get(0).y;
             if (head_x == bug.x && head_y == bug.y) {
                 eaten = true;
                 increaseSize();
             }
-            if (map[head_x / 5][(head_y + 5) / 5] == 1) {
-                //System.out.println("GAME FINISHED!!!");
+            if (head_x == 0 || head_x == 480 || head_y == 0 || head_y == 355 || map[head_x / 5][(head_y + 5) / 5] == 1) {
                 direction = "null";
+                return;
             }
             body.get(0).translate(0, 5);
             map[head_x / 5][(head_y + 5) / 5] = 1;
@@ -128,24 +131,18 @@ public class MovingSnake extends JComponent implements ActionListener {
                 head_y = y;
             }
             repaint();
-        }
-        catch (Exception e){
-            System.out.println("GAME FINISHED!!!");
-            frame.stop();
-        }
     }
 
     public void moveUp(){
-        try {
             int head_x = body.get(0).x;
             int head_y = body.get(0).y;
             if (head_x == bug.x && head_y == bug.y) {
                 eaten = true;
                 increaseSize();
             }
-            if (map[head_x / 5][(head_y - 5) / 5] == 1) {
-                //System.out.println("GAME FINISHED!!!");
+            if (head_x == 0 || head_x == 480 || head_y == 0 || head_y == 355 || map[head_x / 5][(head_y - 5) / 5] == 1) {
                 direction = "null";
+                return;
             }
             body.get(0).translate(0, -5);
             map[head_x / 5][(head_y - 5) / 5] = 1;
@@ -160,24 +157,18 @@ public class MovingSnake extends JComponent implements ActionListener {
                 head_y = y;
             }
             repaint();
-        }
-        catch (Exception e){
-            System.out.println("GAME FINISHED!!!");
-            frame.stop();
-        }
     }
 
     public void moveRight(){
-        try {
             int head_x = body.get(0).x;
             int head_y = body.get(0).y;
             if (head_x == bug.x && head_y == bug.y) {
                 eaten = true;
                 increaseSize();
             }
-            if (map[(head_x + 5) / 5][head_y / 5] == 1) {
-                //System.out.println("GAME FINISHED!!!");
+            if (head_x == 0 || head_x == 480 || head_y == 0 || head_y == 355 || map[(head_x + 5) / 5][head_y / 5] == 1) {
                 direction = "null";
+                return;
             }
             body.get(0).translate(5, 0);
             map[(head_x + 5) / 5][head_y / 5] = 1;
@@ -192,24 +183,18 @@ public class MovingSnake extends JComponent implements ActionListener {
                 head_y = y;
             }
             repaint();
-        }
-        catch (Exception e){
-            System.out.println("GAME FINISHED!!!");
-            frame.stop();
-        }
     }
 
     public void moveLeft(){
-        try {
             int head_x = body.get(0).x;
             int head_y = body.get(0).y;
             if (head_x == bug.x && head_y == bug.y) {
                 eaten = true;
                 increaseSize();
             }
-            if (map[(head_x - 5) / 5][head_y / 5] == 1) {
-                //System.out.println("GAME FINISHED!!!");
+            if (head_x == 0 || head_x == 480 || head_y == 0 || head_y == 355 || map[(head_x - 5) / 5][head_y / 5] == 1) {
                 direction = "null";
+                return;
             }
             body.get(0).translate(-5, 0);
             map[(head_x - 5) / 5][head_y / 5] = 1;
@@ -224,10 +209,5 @@ public class MovingSnake extends JComponent implements ActionListener {
                 head_y = y;
             }
             repaint();
-        }
-        catch (Exception e){
-            System.out.println("GAME FINISHED!!!");
-            frame.stop();
-        }
     }
 }
