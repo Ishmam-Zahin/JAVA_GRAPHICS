@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame {
     private final Integer FRAME_HEIGHT = 400;
     private final Integer FRAME_WIDTH = 500;
-
     private MyActionListener myActionListener;
     private MyKeyBoardListener keyBoardListener;
     Timer t;

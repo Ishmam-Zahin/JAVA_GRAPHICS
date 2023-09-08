@@ -1,11 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 public class MovingSnake extends JComponent {
@@ -14,15 +9,13 @@ public class MovingSnake extends JComponent {
     public String direction;
     private ArrayList<Rectangle> body;
     private int [][] map;
-
     private Random random;
     private MainFrame frame;
-
     private Rectangle bug;
-
     private boolean eaten;
-
+    private int ct;
     public MovingSnake(int x, int y, MainFrame frame){
+        ct = 1;
         this.frame = frame;
         random = new Random();
         bug = new Rectangle();
@@ -61,7 +54,14 @@ public class MovingSnake extends JComponent {
 
         if(eaten) createBug(g2);
         else{
-            g2.setColor(Color.BLUE);
+            if(ct==1){
+                g2.setColor(Color.RED);
+                ct = (ct+1)%2;
+            }
+            else{
+                g2.setColor(Color.BLUE);
+                ct = (ct+1)%2;
+            }
             g2.fill(bug);
         }
     }
