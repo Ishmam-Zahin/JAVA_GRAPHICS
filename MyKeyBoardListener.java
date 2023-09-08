@@ -5,13 +5,20 @@ import java.awt.event.KeyListener;
 public class MyKeyBoardListener implements KeyListener {
     private MovingSnake snake;
 
-    public MyKeyBoardListener(MovingSnake obj){
+    public void assignSnake(MovingSnake obj){
         snake = obj;
     }
     public void keyPressed(KeyEvent event){
         String key = KeyStroke.getKeyStrokeForEvent(event).toString();
         key = key.replace("pressed ", "");
         //System.out.println(key);
+        if(snake.direction.equals("u") || snake.direction.equals("d")){
+            if(key.equals("W") || key.equals("S")) return;
+        }
+        else if(snake.direction.equals("r") || snake.direction.equals("l")){
+            if(key.equals("A") || key.equals("D")) return;
+        }
+
         if(key.equals("w") || key.equals("W")){
             snake.direction = "u";
         }
@@ -24,8 +31,8 @@ public class MyKeyBoardListener implements KeyListener {
         else if(key.equals("s") || key.equals("S")){
             snake.direction = "d";
         }
-        else if(key.equals("p") || key.equals("P")){
-            snake.increaseSize();
+        else{
+            return;
         }
     }
 
