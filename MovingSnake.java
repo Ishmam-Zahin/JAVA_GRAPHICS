@@ -14,7 +14,14 @@ public class MovingSnake extends JComponent {
     private Rectangle bug;
     private boolean eaten;
     private int ct;
+    private StoreScore storeScore;
+    private int highScore;
+    private int speedLevel;
+
     public MovingSnake(int x, int y, MainFrame frame){
+        speedLevel = 1;
+        storeScore = new StoreScore();
+        highScore = storeScore.read();
         ct = 1;
         this.frame = frame;
         random = new Random();
@@ -44,9 +51,9 @@ public class MovingSnake extends JComponent {
 
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawLine(5, 5, 5, 355);
-        g2.drawLine(5, 5, 480, 5);
-        g2.drawLine(480, 5, 480, 355);
+        g2.drawLine(5, 20, 5, 355);
+        g2.drawLine(5, 20, 480, 20);
+        g2.drawLine(480, 20, 480, 355);
         g2.drawLine(5, 355, 480, 355);
         for(int i=0; i<body.size(); i++){
             g2.draw(body.get(i));
@@ -64,17 +71,54 @@ public class MovingSnake extends JComponent {
             }
             g2.fill(bug);
         }
+
+        g2.setColor(Color.RED);
+        g2.drawString(("Score: "+(body.size()-5)), 5, 13);
+        g2.drawString(("HighScore: "+highScore), 200, 13);
+
+        if((body.size()-5) == 5 && speedLevel == 1){
+            speedLevel++;
+            frame.increaseSpeed();
+        }
+        if((body.size()-5) == 10 && speedLevel == 2){
+            speedLevel++;
+            frame.increaseSpeed();
+        }
+        if((body.size()-5) == 25 && speedLevel == 3){
+            speedLevel++;
+            frame.increaseSpeed();
+        }
+        if((body.size()-5) == 30 && speedLevel == 4){
+            speedLevel++;
+            frame.increaseSpeed();
+        }
+        if((body.size()-5) == 35 && speedLevel == 5){
+            speedLevel++;
+            frame.increaseSpeed();
+        }
+        if((body.size()-5) == 40 && speedLevel == 6){
+            speedLevel++;
+            frame.increaseSpeed();
+        }
+        if((body.size()-5) == 45 && speedLevel == 7){
+            speedLevel++;
+            frame.increaseSpeed();
+        }
+        if((body.size()-5) == 50 && speedLevel == 8){
+            speedLevel++;
+            frame.increaseSpeed();
+        }
     }
 
     public void createBug(Graphics2D g){
         int x, y;
         do{
             x = random.nextInt(90);
-            y = random.nextInt(65);
+            y = random.nextInt(50);
             x = x-(x%5);
             y = y-(y%5);
             x=x+5;
-            y=y+5;
+            y=y+20;
         }while (map[x][y]==1);
 
         bug.setBounds(x*5, y*5, 5, 5);
@@ -103,6 +147,9 @@ public class MovingSnake extends JComponent {
             moveDown();
         }
         else{
+            if((body.size()-5)>highScore){
+                storeScore.write((body.size()-5));
+            }
             frame.gameFinished();
         }
     }
@@ -114,7 +161,7 @@ public class MovingSnake extends JComponent {
                 eaten = true;
                 increaseSize();
             }
-            if (head_x == 0 || head_x == 480 || head_y == 0 || head_y == 355 || map[head_x / 5][(head_y + 5) / 5] == 1) {
+            if (head_x == 0 || head_x == 480 || head_y == 15 || head_y == 355 || map[head_x / 5][(head_y + 5) / 5] == 1) {
                 direction = "null";
                 return;
             }
@@ -140,7 +187,7 @@ public class MovingSnake extends JComponent {
                 eaten = true;
                 increaseSize();
             }
-            if (head_x == 0 || head_x == 480 || head_y == 0 || head_y == 355 || map[head_x / 5][(head_y - 5) / 5] == 1) {
+            if (head_x == 0 || head_x == 480 || head_y == 15 || head_y == 355 || map[head_x / 5][(head_y - 5) / 5] == 1) {
                 direction = "null";
                 return;
             }
@@ -166,7 +213,7 @@ public class MovingSnake extends JComponent {
                 eaten = true;
                 increaseSize();
             }
-            if (head_x == 0 || head_x == 480 || head_y == 0 || head_y == 355 || map[(head_x + 5) / 5][head_y / 5] == 1) {
+            if (head_x == 0 || head_x == 480 || head_y == 15 || head_y == 355 || map[(head_x + 5) / 5][head_y / 5] == 1) {
                 direction = "null";
                 return;
             }
@@ -192,7 +239,7 @@ public class MovingSnake extends JComponent {
                 eaten = true;
                 increaseSize();
             }
-            if (head_x == 0 || head_x == 480 || head_y == 0 || head_y == 355 || map[(head_x - 5) / 5][head_y / 5] == 1) {
+            if (head_x == 0 || head_x == 480 || head_y == 15 || head_y == 355 || map[(head_x - 5) / 5][head_y / 5] == 1) {
                 direction = "null";
                 return;
             }
