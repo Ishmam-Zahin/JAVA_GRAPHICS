@@ -31,6 +31,10 @@ public class MainFrame extends JFrame {
         t.start();
     }
 
+    public void increaseSpeed(){
+        t.setDelay((t.getDelay()-10));
+    }
+
     public void stop(){
         t.stop();
     }
