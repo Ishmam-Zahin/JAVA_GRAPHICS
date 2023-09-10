@@ -7,36 +7,74 @@ public class MainFrame extends JFrame {
     private final Integer FRAME_WIDTH = 500;
     private MyActionListener myActionListener;
     private MyKeyBoardListener keyBoardListener;
-    Timer t;
+    private SnakeActionListener snakeActionListener;
+    private BugListener bugListener;
+    public int bug_x;
+    public int bug_y;
+    public int [][] map;
+    public boolean eaten;
+    Timer t1, t2;
+
+    MovingSnake snake;
+    MyBug bug;
 
     public MainFrame(){
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Snake game");
 
+        snake = new MovingSnake(this);
+        bug = new MyBug(this);
+
+        map = new int[100][100];
+        for(int i=0; i<100; i++){
+            for(int j=0; j<100; j++){
+                map[i][j]=0;
+            }
+        }
+
+        eaten = true;
+
         myActionListener = new MyActionListener(this);
-        keyBoardListener = new MyKeyBoardListener();
+        keyBoardListener = new MyKeyBoardListener(snake);
+        bugListener = new BugListener(bug);
+        snakeActionListener = new SnakeActionListener(snake);
         addKeyListener(keyBoardListener);
+
+        t1 = new Timer(100, snakeActionListener);
+        t2 = new Timer(100, bugListener);
+    }
+
+    public boolean isEaten(int x, int y){
+        if(x == bug_x && y == bug_y){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public void myComponents(){
         setFocusable(true);
         requestFocus();
-        MovingSnake snake = new MovingSnake(20, 30, this);
-        keyBoardListener.assignSnake(snake);
+        snake.resetSnake();
         add(snake);
         setVisible(true);
-        SnakeActionListener snakeActionListener = new SnakeActionListener(snake);
-        t = new Timer(80, snakeActionListener);
-        t.start();
+        add(bug);
+        setVisible(true);
+
+        t1.start();
+        t2.start();
+
     }
 
     public void increaseSpeed(){
-        t.setDelay((t.getDelay()-10));
+        t1.setDelay((t1.getDelay()-50));
     }
 
     public void stop(){
-        t.stop();
+        t1.stop();
+        t2.stop();
     }
 
     public void startMenu(){

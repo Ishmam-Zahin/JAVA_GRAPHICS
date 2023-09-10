@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 
 public class MyKeyBoardListener implements KeyListener {
     private MovingSnake snake;
 
-    public void assignSnake(MovingSnake obj){
+    public MyKeyBoardListener(MovingSnake obj){
         snake = obj;
     }
     public void keyPressed(KeyEvent event){
